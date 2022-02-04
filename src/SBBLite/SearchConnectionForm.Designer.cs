@@ -44,16 +44,16 @@
             this.Endstation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Starttime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Arrivetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.HomePicture = new System.Windows.Forms.PictureBox();
             this.MailPicture = new System.Windows.Forms.PictureBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStriplableOne = new System.Windows.Forms.ToolStripStatusLabel();
             this.ConnectinoSearchGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SwitchPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnectionList)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomePicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MailPicture)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConnectinoSearchGroupBox
@@ -82,7 +82,7 @@
             this.btnSearch.Location = new System.Drawing.Point(485, 132);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(146, 29);
-            this.btnSearch.TabIndex = 1;
+            this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Verbindung suchen";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
@@ -102,7 +102,7 @@
             this.dtPDate.Location = new System.Drawing.Point(8, 131);
             this.dtPDate.Name = "dtPDate";
             this.dtPDate.Size = new System.Drawing.Size(304, 30);
-            this.dtPDate.TabIndex = 1;
+            this.dtPDate.TabIndex = 200;
             this.dtPDate.Value = new System.DateTime(2022, 2, 3, 14, 8, 45, 0);
             // 
             // lblDestinationStation
@@ -182,6 +182,7 @@
             this.dgvConnectionList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvConnectionList.Size = new System.Drawing.Size(815, 271);
             this.dgvConnectionList.TabIndex = 100;
+            this.dgvConnectionList.TabStop = false;
             // 
             // platform
             // 
@@ -218,23 +219,6 @@
             this.Arrivetime.Name = "Arrivetime";
             this.Arrivetime.ReadOnly = true;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 493);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(839, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.LinkColor = System.Drawing.Color.Red;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 16);
-            // 
             // HomePicture
             // 
             this.HomePicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -258,6 +242,25 @@
             this.MailPicture.TabStop = false;
             this.MailPicture.Click += new System.EventHandler(this.Icon_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStriplableOne});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 493);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(839, 22);
+            this.statusStrip1.TabIndex = 105;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusStriplableOne
+            // 
+            this.statusStriplableOne.ActiveLinkColor = System.Drawing.Color.Blue;
+            this.statusStriplableOne.ForeColor = System.Drawing.Color.Blue;
+            this.statusStriplableOne.Name = "statusStriplableOne";
+            this.statusStriplableOne.Size = new System.Drawing.Size(0, 16);
+            this.statusStriplableOne.Visible = false;
+            // 
             // SearchConnectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -265,9 +268,9 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(839, 515);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.MailPicture);
             this.Controls.Add(this.HomePicture);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgvConnectionList);
             this.Controls.Add(this.ConnectinoSearchGroupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -278,10 +281,10 @@
             this.ConnectinoSearchGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SwitchPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConnectionList)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomePicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MailPicture)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,9 +307,9 @@
         private DataGridViewTextBoxColumn Endstation;
         private DataGridViewTextBoxColumn Starttime;
         private DataGridViewTextBoxColumn Arrivetime;
-        private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
         private PictureBox HomePicture;
         private PictureBox MailPicture;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel statusStriplableOne;
     }
 }

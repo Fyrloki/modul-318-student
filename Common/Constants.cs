@@ -24,5 +24,11 @@
         public const string MAILICON_TAG = "MailIcon";
 
         public const string SWITCHICON_TAG = "SwitchIcon";
+
+        public const string INPUT_NOT_VALID = "Eingabe nicht gültig";
+
+        public const string NO_TIME_AVAILABLE = "Keine zeit verfügbar";
+
+        public const string TIME_FORMAT = "HH:mm";
     }
 }

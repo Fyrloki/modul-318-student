@@ -62,8 +62,26 @@ namespace SBBLite
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
+            statusStriplableOne.Visible = false;
+
+            ProveUserInput(out bool isValid);
+
+            if (!isValid)
+            {
+                return;
+            }
+
             var connections = _transport.GetConnections(txtStartStation.Text, txtDestinationStation.Text);
             int rowindex = 0;
+
+            dgvConnectionList.Rows.Clear();
+
+            if (connections.ConnectionList.Count == 0)
+            {
+                statusStriplableOne.Text = "Keine Verbindung gefunden";
+                statusStriplableOne.Visible = true;
+                return;
+            }
 
             foreach (var connection in connections.ConnectionList)
             {
@@ -74,12 +92,42 @@ namespace SBBLite
 
         private void AddRowToConnectionView(Connection connection, int rowindex)
         {
-            var departureTime = connection.From.Departure;
             dgvConnectionList.Rows.Add();
             dgvConnectionList.Rows[rowindex].Cells[0].Value = connection.From.Platform;
             dgvConnectionList.Rows[rowindex].Cells[1].Value = connection.From.Station.Name;
             dgvConnectionList.Rows[rowindex].Cells[2].Value = connection.To.Station.Name;
-            dgvConnectionList.Rows[rowindex].Cells[3].Value = connection.From.Departure.ToString();
+            dgvConnectionList.Rows[rowindex].Cells[3].Value = GetConnectionTimeString(connection.From.Departure);
+            dgvConnectionList.Rows[rowindex].Cells[4].Value = GetConnectionTimeString(connection.To.Arrival);
+        }
+
+        private string GetConnectionTimeString(DateTime? departure)
+        {
+            string timeString;
+
+            if (departure is null)
+            {
+                timeString = "No time";
+            }
+            else
+            {
+                DateTime date = (DateTime)departure;
+                timeString = date.ToString(Constants.TIME_FORMAT);
+            }
+
+            return timeString;
+        }
+
+        private void ProveUserInput(out bool isValid)
+        {
+            isValid = !string.IsNullOrEmpty(txtStartStation.Text)
+                      && !string.IsNullOrEmpty(txtDestinationStation.Text)
+                      && !txtStartStation.Text.Any(char.IsDigit)
+                      && !txtDestinationStation.Text.Any(char.IsDigit);
+
+            if (isValid) return;
+
+            statusStriplableOne.Visible = true;
+            statusStriplableOne.Text = Constants.INPUT_NOT_VALID;
         }
     }
 }

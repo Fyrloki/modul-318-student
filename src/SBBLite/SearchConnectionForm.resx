@@ -123,13 +123,10 @@
   <metadata name="Arrivetime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="HomePicture.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAP
-        YwAAD2MB18Fk4AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAADICSURBVHhe7d0J
+        YgAAD2IBBYaGBAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAADICSURBVHhe7d0J
         tGx3VefxR+aRkDAFAiSMYVgMIoIhYQYBh0btIChgmI0YwQV2dNE02nZEBMFGG2m1nRVpQVRUxAFtJ4zt
         BDiDtIogMqjM89C/TSrwP//3e+/uOv+q/zl16rvX+qyV7Pfuvf/atevUfvfuW3XoU5/6FAAA2DM2CQAA
         ls0mAQDAstkkAABYNpsEAADLZpMAAGDZbBIAACybTQIAgGWzSQAAsGw2CQAAls0mAQDAstkkAABYNpsE
@@ -821,6 +818,12 @@
         ow8JffQhoU99d7nL/wcN/kDcNmktUgAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>57</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA
