@@ -35,24 +35,8 @@
                 throw new ArgumentNullException(nameof(id));
             }
 
-            var uri = new Uri($"{WebApiHost}stationboard?station={station}&id={id}");
+            var uri = new Uri($"{WebApiHost}stationboard?station={station}&id={id}&limit=16");
             return this.GetObject<StationBoardRoot>(uri);
-        }
-
-        public Connections GetConnections(string fromStation, string toStation)
-        {
-            if (string.IsNullOrEmpty(fromStation))
-            {
-                throw new ArgumentNullException(nameof(fromStation));
-            }
-
-            if (string.IsNullOrEmpty(toStation))
-            {
-                throw new ArgumentNullException(nameof(toStation));
-            }
-
-            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}");
-            return this.GetObject<Connections>(uri);
         }
 
         public void Dispose()

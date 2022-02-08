@@ -25,14 +25,15 @@ namespace SBBLite
             switch (button.Tag)
             {
                 case Constants.SEARCH_CONNECTION_TAG:
-
+                {
                     new SearchConnectionForm(_transport).ShowDialog();
                     break;
-
+                }
                 case Constants.BOARD_TAG:
-
+                {
+                    new DepartureBoardForm(_transport).ShowDialog();
                     break;
-
+                }
                 case Constants.MAP_TAG:
 
                     break;

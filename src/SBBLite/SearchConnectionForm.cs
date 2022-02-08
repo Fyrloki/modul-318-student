@@ -75,7 +75,6 @@ namespace SBBLite
             string arrive = Constants.WILDCARD + txtDestinationStation.Text + Constants.WILDCARD;
 
             var connections = _transport.GetConnections(start, arrive, dtPDate.Value, dtpTime.Value, radioArrive.Checked);
-            int rowindex = 0;
 
             dgvConnectionList.Rows.Clear();
 
@@ -91,21 +90,23 @@ namespace SBBLite
                 connections.ConnectionList.Reverse();
             }
 
-            foreach (var connection in connections.ConnectionList)
-            {
-                AddRowToConnectionView(connection, rowindex);
-                rowindex++;
-            }
+            FillConnectionsInView(connections.ConnectionList);
         }
 
-        private void AddRowToConnectionView(Connection connection, int rowindex)
+        private void FillConnectionsInView(List<Connection> connections)
         {
-            dgvConnectionList.Rows.Add();
-            dgvConnectionList.Rows[rowindex].Cells[0].Value = connection.From.Platform;
-            dgvConnectionList.Rows[rowindex].Cells[1].Value = connection.From.Station.Name;
-            dgvConnectionList.Rows[rowindex].Cells[2].Value = connection.To.Station.Name;
-            dgvConnectionList.Rows[rowindex].Cells[3].Value = GetConnectionTimeString(connection.From.Departure);
-            dgvConnectionList.Rows[rowindex].Cells[4].Value = GetConnectionTimeString(connection.To.Arrival);
+            int i = 0;
+
+            foreach (var connection in connections)
+            {
+                dgvConnectionList.Rows.Add();
+                dgvConnectionList.Rows[i].Cells[0].Value = connection.From.Platform;
+                dgvConnectionList.Rows[i].Cells[1].Value = connection.From.Station.Name;
+                dgvConnectionList.Rows[i].Cells[2].Value = connection.To.Station.Name;
+                dgvConnectionList.Rows[i].Cells[3].Value = GetConnectionTimeString(connection.From.Departure);
+                dgvConnectionList.Rows[i].Cells[4].Value = GetConnectionTimeString(connection.To.Arrival);
+                i++;
+            }
         }
 
         private string GetConnectionTimeString(DateTime? departure)
