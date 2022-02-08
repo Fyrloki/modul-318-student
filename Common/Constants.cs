@@ -30,5 +30,9 @@
         public const string NO_TIME_AVAILABLE = "Keine zeit verfügbar";
 
         public const string TIME_FORMAT = "HH:mm";
+
+        public const string WILDCARD = "%";
+
+        public const string NO_CONNECTION_FOUND = "Keine Verbindung gefunden";
     }
 }

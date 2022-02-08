@@ -71,16 +71,24 @@ namespace SBBLite
                 return;
             }
 
-            var connections = _transport.GetConnections(txtStartStation.Text, txtDestinationStation.Text);
+            string start = Constants.WILDCARD + txtStartStation.Text + Constants.WILDCARD;
+            string arrive = Constants.WILDCARD + txtDestinationStation.Text + Constants.WILDCARD;
+
+            var connections = _transport.GetConnections(start, arrive, dtPDate.Value, dtpTime.Value, radioArrive.Checked);
             int rowindex = 0;
 
             dgvConnectionList.Rows.Clear();
 
             if (connections.ConnectionList.Count == 0)
             {
-                statusStriplableOne.Text = "Keine Verbindung gefunden";
+                statusStriplableOne.Text = Constants.NO_CONNECTION_FOUND;
                 statusStriplableOne.Visible = true;
                 return;
+            }
+
+            if (radioArrive.Checked)
+            {
+                connections.ConnectionList.Reverse();
             }
 
             foreach (var connection in connections.ConnectionList)
@@ -102,19 +110,14 @@ namespace SBBLite
 
         private string GetConnectionTimeString(DateTime? departure)
         {
-            string timeString;
-
             if (departure is null)
             {
-                timeString = "No time";
-            }
-            else
-            {
-                DateTime date = (DateTime)departure;
-                timeString = date.ToString(Constants.TIME_FORMAT);
+                throw new ArgumentNullException(nameof(departure));
             }
 
-            return timeString;
+            DateTime date = (DateTime)departure;
+
+            return date.ToString(Constants.TIME_FORMAT);
         }
 
         private void ProveUserInput(out bool isValid)

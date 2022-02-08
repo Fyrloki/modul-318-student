@@ -10,7 +10,7 @@
     {
         private const string WebApiHost = "https://transport.opendata.ch/v1/";
 
-        private readonly HttpClient httpClient = new HttpClient();
+        private readonly HttpClient httpClient = new ();
 
         public Stations GetStations(string query)
         {
@@ -58,6 +58,23 @@
         public void Dispose()
         {
             this.httpClient?.Dispose();
+        }
+
+        public Connections GetConnections(string fromStation, string toStation, DateTime date, DateTime time, bool isArrival)
+        {
+            if (string.IsNullOrEmpty(fromStation))
+            {
+                throw new ArgumentNullException(nameof(fromStation));
+            }
+
+            if (string.IsNullOrEmpty(toStation))
+            {
+                throw new ArgumentNullException(nameof(toStation));
+            }
+
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&date={date.Date}&time={time.TimeOfDay}&isArrivalTime={(isArrival ? 1 : 0)}&limit=16");
+
+            return this.GetObject<Connections>(uri);
         }
 
         private T GetObject<T>(Uri uri)

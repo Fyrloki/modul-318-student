@@ -1,4 +1,6 @@
-﻿namespace SwissTransport
+﻿using System;
+
+namespace SwissTransport
 {
     using FluentAssertions;
     using SwissTransport.Core;
@@ -33,7 +35,7 @@
         [Fact]
         public void Connections()
         {
-            Connections connections = this.testee.GetConnections("Sursee", "Luzern");
+            Connections connections = this.testee.GetConnections("Sursee", "Luzern", DateTime.Today, DateTime.Today, false);
 
             connections.Should().NotBeNull();
         }
