@@ -2,109 +2,107 @@
 using SwissTransport.Core;
 using SwissTransport.Models;
 
-namespace SBBLite
+namespace SBBLite;
+
+public partial class DepartureBoardForm : Form
 {
-    public partial class DepartureBoardForm : Form
+    private readonly ITransport _transport;
+
+    public DepartureBoardForm(ITransport transport)
     {
-        private readonly ITransport _transport;
+        InitializeComponent();
 
-        public DepartureBoardForm(ITransport transport)
+        _transport = transport;
+    }
+
+    private void HomeIcon_Clicked(object sender, EventArgs e)
+    {
+        Close();
+    }
+
+    private void SearchButton_Clicked(object sender, EventArgs e)
+    {
+        statusStrip.Visible = false;
+
+        if (cbSearchValue.Text == string.Empty)
         {
-            InitializeComponent();
-
-            _transport = transport;
+            statusStrip.Text = Constants.INPUT_NOT_VALID;
+            statusStrip.Visible = true;
+            return;
         }
 
-        private void HomeIcon_Clicked(object sender, EventArgs e)
+        var stations = _transport.GetStations(cbSearchValue.Text);
+
+        if (stations.StationList.Count == 0)
         {
-            Close();
+            statusStrip.Text = Constants.NO_CONNECTION_FOUND;
+            statusStrip.Visible = true;
+            return;
         }
 
-        private void SearchButton_Clicked(object sender, EventArgs e)
+        var station = stations.StationList
+            .Where(x => x.Name.Equals(cbSearchValue.Text, StringComparison.OrdinalIgnoreCase)).ToList()
+            .FirstOrDefault();
+
+        var stationBoard = _transport.GetStationBoard(station.Name, station.Id);
+
+        ShowConnections(stationBoard);
+    }
+
+    private void ShowConnections(StationBoardRoot? stationBoard)
+    {
+        if (stationBoard == null)
         {
-            statusStrip.Visible = false;
-
-            if (cbSearchValue.Text == String.Empty)
-            {
-                statusStrip.Text = Constants.INPUT_NOT_VALID;
-                statusStrip.Visible = true;
-                return;
-            }
-
-            Stations stations = _transport.GetStations(cbSearchValue.Text);
-
-            if (stations.StationList.Count == 0)
-            {
-                statusStrip.Text = Constants.NO_CONNECTION_FOUND;
-                statusStrip.Visible = true;
-                return;
-            }
-
-            Station station = stations.StationList.Where(x => x.Name.Equals(cbSearchValue.Text, StringComparison.OrdinalIgnoreCase)).ToList().FirstOrDefault();
-
-            StationBoardRoot? stationBoard = _transport.GetStationBoard(station.Name, station.Id);
-
-            ShowConnections(stationBoard);
+            statusStrip.Text = Constants.NO_CONNECTION_FOUND;
+            statusStrip.Visible = true;
+            return;
         }
 
-        private void ShowConnections(StationBoardRoot? stationBoard)
-        {
-            if (stationBoard == null)
-            {
-                statusStrip.Text = Constants.NO_CONNECTION_FOUND;
-                statusStrip.Visible = true;
-                return;
-            }
+        FillStationInView(stationBoard.Entries);
+    }
 
-            FillStationInView(stationBoard.Entries);
+    private void FillStationInView(List<StationBoard> entries)
+    {
+        var i = 0;
+
+        foreach (var entry in entries)
+        {
+            dgvConnectionList.Rows.Add();
+            dgvConnectionList.Rows[i].Cells[0].Value = entry.Category;
+            dgvConnectionList.Rows[i].Cells[1].Value = entry.Number;
+            dgvConnectionList.Rows[i].Cells[2].Value = entry.Operator;
+            dgvConnectionList.Rows[i].Cells[3].Value = entry.Stop.Departure;
+            dgvConnectionList.Rows[i].Cells[4].Value = entry.To;
+            i++;
+        }
+    }
+
+    private void SearchValue_Changed(object sender, EventArgs e)
+    {
+        var comboBox = (ComboBox) sender;
+
+        comboBox.Text = comboBox.Text.Trim();
+        comboBox.Items.Clear();
+        comboBox.SelectionStart = comboBox.Text.Length;
+
+        var stations = _transport.GetStations(Constants.WILDCARD + comboBox.Text + Constants.WILDCARD);
+
+        if (stations.StationList.Count == 0) return;
+
+        comboBox.Items.AddRange(GetStationNames(stations.StationList));
+    }
+
+    private object[] GetStationNames(List<Station> stationList)
+    {
+        var names = new string[stationList.Count];
+        var i = 0;
+
+        foreach (var station in stationList)
+        {
+            names[i] = station.Name;
+            i++;
         }
 
-        private void FillStationInView(List<StationBoard> entries)
-        {
-            int i = 0;
-
-            foreach (var entry in entries)
-            {
-                dgvConnectionList.Rows.Add();
-                dgvConnectionList.Rows[i].Cells[0].Value = entry.Category;
-                dgvConnectionList.Rows[i].Cells[1].Value = entry.Number;
-                dgvConnectionList.Rows[i].Cells[2].Value = entry.Operator;
-                dgvConnectionList.Rows[i].Cells[3].Value = entry.Stop.Departure;
-                dgvConnectionList.Rows[i].Cells[4].Value = entry.To;
-                i++;
-            }
-        }
-
-        private void SearchValue_Changed(object sender, EventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-
-            comboBox.Text = comboBox.Text.Trim();
-            comboBox.Items.Clear();
-            comboBox.SelectionStart = comboBox.Text.Length;
-
-            var stations = _transport.GetStations(Constants.WILDCARD + comboBox.Text + Constants.WILDCARD);
-
-            if (stations.StationList.Count == 0)
-            {
-                return;
-            }
-
-            comboBox.Items.AddRange(GetStationNames(stations.StationList));
-        }
-
-        private object[] GetStationNames(List<Station> stationList)
-        {
-            string[] names = new string[stationList.Count];
-            int i = 0;
-
-            foreach (var station in stationList)
-            {
-                names[i] = station.Name;
-                i++;
-            }
-
-            return names;
-        }
+        return names;
     }
 }

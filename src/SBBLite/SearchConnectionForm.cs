@@ -27,7 +27,6 @@ namespace SBBLite
         private void TextBox_Enter(object sender, EventArgs e)
         {
             TextBox? textBox = sender as TextBox;
-
             textBox.BeginInvoke(new Action(textBox.SelectAll));
         }
 

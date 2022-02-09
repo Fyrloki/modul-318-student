@@ -203,6 +203,7 @@
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.cbSearchValue);
             this.Controls.Add(this.lblStationName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DepartureBoardForm";
             this.Text = "Abfahrtstafel";
             ((System.ComponentModel.ISupportInitialize)(this.HomePicture)).EndInit();

@@ -35,21 +35,25 @@ namespace SBBLite
                     break;
                 }
                 case Constants.MAP_TAG:
+                {
+                    MessageBox.Show(Constants.NOT_IMPLEMENTED_FEATURE, Constants.INFO_CAPTION, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     break;
-
+                }
                 case Constants.NEAR_STATIONS_TAG:
-
+                {
+                    new NearStationsForm(_transport).ShowDialog();
                     break;
-
+                }
                 default:
-
+                {
                     if (MessageBox.Show(Constants.DO_YOU_WANT_TO_END, Constants.END_CAPTION, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         Close();
                     }
 
                     break;
+                }
             }
         }
     }
