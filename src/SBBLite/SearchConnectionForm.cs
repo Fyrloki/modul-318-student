@@ -21,13 +21,7 @@ namespace SBBLite
         private void SearchConnectionForm_Shown(object sender, EventArgs e)
         {
             dgvConnectionList.RowHeadersVisible = false;
-            txtStartStation.Focus();
-        }
-
-        private void TextBox_Enter(object sender, EventArgs e)
-        {
-            TextBox? textBox = sender as TextBox;
-            textBox.BeginInvoke(new Action(textBox.SelectAll));
+            cBDepartionStation.Focus();
         }
 
         private void Icon_Click(object sender, EventArgs e)
@@ -52,7 +46,7 @@ namespace SBBLite
 
                 case Constants.SWITCHICON_TAG:
                 {
-                    (txtStartStation.Text, txtDestinationStation.Text) = (txtDestinationStation.Text, txtStartStation.Text);
+                    (cBDepartionStation.Text, cbArrivalStation.Text) = (cbArrivalStation.Text, cBDepartionStation.Text);
 
                     break;
                 }
@@ -62,6 +56,8 @@ namespace SBBLite
         private void BtnSearch_Click(object sender, EventArgs e)
         {
             statusStriplableOne.Visible = false;
+            cBDepartionStation.Text = cBDepartionStation.Text.Trim();
+            cbArrivalStation.Text = cbArrivalStation.Text.Trim();
 
             ProveUserInput(out bool isValid);
 
@@ -70,8 +66,8 @@ namespace SBBLite
                 return;
             }
 
-            string start = Constants.WILDCARD + txtStartStation.Text + Constants.WILDCARD;
-            string arrive = Constants.WILDCARD + txtDestinationStation.Text + Constants.WILDCARD;
+            string start = Constants.WILDCARD + cBDepartionStation.Text + Constants.WILDCARD;
+            string arrive = Constants.WILDCARD + cbArrivalStation.Text + Constants.WILDCARD;
 
             var connections = _transport.GetConnections(start, arrive, dtPDate.Value, dtpTime.Value, radioArrive.Checked);
 
@@ -120,12 +116,49 @@ namespace SBBLite
             return date.ToString(Constants.TIME_FORMAT);
         }
 
+        private void SearchValue_Changed(object sender, EventArgs e)
+        {
+            var comboBox = (ComboBox)sender;
+
+            if (!_valueChangedByUser || string.IsNullOrEmpty(comboBox.Text)) return;
+
+            comboBox.Text = comboBox.Text.Trim();
+            string text = comboBox.Text;
+            comboBox.Items.Clear();
+
+            var stations = _transport.GetStations(Constants.WILDCARD + comboBox.Text + Constants.WILDCARD);
+
+            if (stations.StationList.Count == 0 || stations.StationList[0].Id == null) return;
+
+            comboBox.Items.AddRange(GetStationNames(stations.StationList));
+            _valueChangedByUser = false;
+            comboBox.Text = text;
+            _valueChangedByUser = true;
+            comboBox.SelectionStart = comboBox.Text.Length;
+        }
+
+        private bool _valueChangedByUser = true;
+
+        private object[] GetStationNames(List<Station> stationList)
+        {
+            var names = new string[stationList.Count];
+            var i = 0;
+
+            foreach (var station in stationList)
+            {
+                names[i] = station.Name;
+                i++;
+            }
+
+            return names;
+        }
+
         private void ProveUserInput(out bool isValid)
         {
-            isValid = !string.IsNullOrEmpty(txtStartStation.Text)
-                      && !string.IsNullOrEmpty(txtDestinationStation.Text)
-                      && !txtStartStation.Text.Any(char.IsDigit)
-                      && !txtDestinationStation.Text.Any(char.IsDigit);
+            isValid = !string.IsNullOrEmpty(cBDepartionStation.Text)
+                      && !string.IsNullOrEmpty(cbArrivalStation.Text)
+                      && !cBDepartionStation.Text.Any(char.IsDigit)
+                      && !cbArrivalStation.Text.Any(char.IsDigit);
 
             if (isValid) return;
 

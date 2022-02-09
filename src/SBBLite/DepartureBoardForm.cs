@@ -8,6 +8,8 @@ public partial class DepartureBoardForm : Form
 {
     private readonly ITransport _transport;
 
+    private bool _valueChangedByUser = true;
+
     public DepartureBoardForm(ITransport transport)
     {
         InitializeComponent();
@@ -81,15 +83,21 @@ public partial class DepartureBoardForm : Form
     {
         var comboBox = (ComboBox) sender;
 
+        if (!_valueChangedByUser || string.IsNullOrEmpty(comboBox.Text)) return;
+
         comboBox.Text = comboBox.Text.Trim();
+        string text = comboBox.Text;
         comboBox.Items.Clear();
-        comboBox.SelectionStart = comboBox.Text.Length;
 
         var stations = _transport.GetStations(Constants.WILDCARD + comboBox.Text + Constants.WILDCARD);
 
-        if (stations.StationList.Count == 0) return;
+        if (stations.StationList.Count == 0 || stations.StationList[0].Id == null) return;
 
         comboBox.Items.AddRange(GetStationNames(stations.StationList));
+        _valueChangedByUser = false;
+        comboBox.Text = text;
+        _valueChangedByUser = true;
+        comboBox.SelectionStart = comboBox.Text.Length;
     }
 
     private object[] GetStationNames(List<Station> stationList)

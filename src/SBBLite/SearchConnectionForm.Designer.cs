@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ConnectinoSearchGroupBox = new System.Windows.Forms.GroupBox();
+            this.cbArrivalStation = new System.Windows.Forms.ComboBox();
+            this.cBDepartionStation = new System.Windows.Forms.ComboBox();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.radioArrive = new System.Windows.Forms.RadioButton();
             this.radioDepart = new System.Windows.Forms.RadioButton();
@@ -40,8 +42,6 @@
             this.lblDestinationStation = new System.Windows.Forms.Label();
             this.lblStartStation = new System.Windows.Forms.Label();
             this.SwitchPicture = new System.Windows.Forms.PictureBox();
-            this.txtDestinationStation = new System.Windows.Forms.TextBox();
-            this.txtStartStation = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvConnectionList = new System.Windows.Forms.DataGridView();
             this.platform = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +63,8 @@
             // 
             // ConnectinoSearchGroupBox
             // 
+            this.ConnectinoSearchGroupBox.Controls.Add(this.cbArrivalStation);
+            this.ConnectinoSearchGroupBox.Controls.Add(this.cBDepartionStation);
             this.ConnectinoSearchGroupBox.Controls.Add(this.dtpTime);
             this.ConnectinoSearchGroupBox.Controls.Add(this.radioArrive);
             this.ConnectinoSearchGroupBox.Controls.Add(this.radioDepart);
@@ -71,8 +73,6 @@
             this.ConnectinoSearchGroupBox.Controls.Add(this.lblDestinationStation);
             this.ConnectinoSearchGroupBox.Controls.Add(this.lblStartStation);
             this.ConnectinoSearchGroupBox.Controls.Add(this.SwitchPicture);
-            this.ConnectinoSearchGroupBox.Controls.Add(this.txtDestinationStation);
-            this.ConnectinoSearchGroupBox.Controls.Add(this.txtStartStation);
             this.ConnectinoSearchGroupBox.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ConnectinoSearchGroupBox.Location = new System.Drawing.Point(12, 12);
             this.ConnectinoSearchGroupBox.MinimumSize = new System.Drawing.Size(640, 172);
@@ -81,6 +81,26 @@
             this.ConnectinoSearchGroupBox.TabIndex = 0;
             this.ConnectinoSearchGroupBox.TabStop = false;
             this.ConnectinoSearchGroupBox.Text = "Verbindung suchen";
+            // 
+            // cbArrivalStation
+            // 
+            this.cbArrivalStation.FormattingEnabled = true;
+            this.cbArrivalStation.Location = new System.Drawing.Point(369, 55);
+            this.cbArrivalStation.Name = "cbArrivalStation";
+            this.cbArrivalStation.Size = new System.Drawing.Size(268, 31);
+            this.cbArrivalStation.TabIndex = 202;
+            this.cbArrivalStation.TextUpdate += new System.EventHandler(this.SearchValue_Changed);
+            this.cbArrivalStation.TextChanged += new System.EventHandler(this.SearchValue_Changed);
+            // 
+            // cBDepartionStation
+            // 
+            this.cBDepartionStation.FormattingEnabled = true;
+            this.cBDepartionStation.Location = new System.Drawing.Point(11, 55);
+            this.cBDepartionStation.Name = "cBDepartionStation";
+            this.cBDepartionStation.Size = new System.Drawing.Size(268, 31);
+            this.cBDepartionStation.TabIndex = 201;
+            this.cBDepartionStation.TextUpdate += new System.EventHandler(this.SearchValue_Changed);
+            this.cBDepartionStation.TextChanged += new System.EventHandler(this.SearchValue_Changed);
             // 
             // dtpTime
             // 
@@ -166,27 +186,6 @@
             this.SwitchPicture.TabIndex = 2;
             this.SwitchPicture.TabStop = false;
             this.SwitchPicture.Click += new System.EventHandler(this.Icon_Click);
-            // 
-            // txtDestinationStation
-            // 
-            this.txtDestinationStation.Location = new System.Drawing.Point(369, 57);
-            this.txtDestinationStation.MaximumSize = new System.Drawing.Size(262, 30);
-            this.txtDestinationStation.MinimumSize = new System.Drawing.Size(262, 30);
-            this.txtDestinationStation.Name = "txtDestinationStation";
-            this.txtDestinationStation.Size = new System.Drawing.Size(262, 30);
-            this.txtDestinationStation.TabIndex = 1;
-            this.txtDestinationStation.Enter += new System.EventHandler(this.TextBox_Enter);
-            // 
-            // txtStartStation
-            // 
-            this.txtStartStation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStartStation.Location = new System.Drawing.Point(8, 59);
-            this.txtStartStation.MaximumSize = new System.Drawing.Size(262, 30);
-            this.txtStartStation.MinimumSize = new System.Drawing.Size(262, 30);
-            this.txtStartStation.Name = "txtStartStation";
-            this.txtStartStation.Size = new System.Drawing.Size(262, 30);
-            this.txtStartStation.TabIndex = 0;
-            this.txtStartStation.Enter += new System.EventHandler(this.TextBox_Enter);
             // 
             // btnSearch
             // 
@@ -362,8 +361,6 @@
 
         private GroupBox ConnectinoSearchGroupBox;
         private PictureBox SwitchPicture;
-        private TextBox txtDestinationStation;
-        private TextBox txtStartStation;
         private Button btnSearch;
         private Label lblDate;
         private DateTimePicker dtPDate;
@@ -382,5 +379,7 @@
         private DateTimePicker dtpTime;
         private RadioButton radioArrive;
         private RadioButton radioDepart;
+        private ComboBox cbArrivalStation;
+        private ComboBox cBDepartionStation;
     }
 }
