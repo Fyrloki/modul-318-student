@@ -241,7 +241,7 @@
             this.dgvConnectionList.RowHeadersWidth = 51;
             this.dgvConnectionList.RowTemplate.Height = 29;
             this.dgvConnectionList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConnectionList.Size = new System.Drawing.Size(881, 256);
+            this.dgvConnectionList.Size = new System.Drawing.Size(881, 283);
             this.dgvConnectionList.TabIndex = 100;
             this.dgvConnectionList.TabStop = false;
             // 
@@ -309,7 +309,7 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusStriplableOne});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 462);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 489);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(905, 22);
             this.statusStrip1.TabIndex = 105;
@@ -326,11 +326,12 @@
             // SearchConnectionForm
             // 
             this.AcceptButton = this.btnSearch;
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(905, 484);
+            this.ClientSize = new System.Drawing.Size(905, 511);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.MailPicture);
             this.Controls.Add(this.btnSearch);
@@ -339,8 +340,8 @@
             this.Controls.Add(this.ConnectinoSearchGroupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(923, 531);
-            this.MinimumSize = new System.Drawing.Size(923, 531);
+            this.MaximumSize = new System.Drawing.Size(923, 800);
+            this.MinimumSize = new System.Drawing.Size(923, 0);
             this.Name = "SearchConnectionForm";
             this.Text = "Verbindungen";
             this.Shown += new System.EventHandler(this.SearchConnectionForm_Shown);

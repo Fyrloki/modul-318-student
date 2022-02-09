@@ -83,7 +83,7 @@
             // 
             this.HomePicture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.HomePicture.Image = ((System.Drawing.Image)(resources.GetObject("HomePicture.Image")));
-            this.HomePicture.Location = new System.Drawing.Point(735, 12);
+            this.HomePicture.Location = new System.Drawing.Point(754, 12);
             this.HomePicture.Name = "HomePicture";
             this.HomePicture.Size = new System.Drawing.Size(40, 42);
             this.HomePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -96,9 +96,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusStrip});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 349);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 413);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(793, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(812, 22);
             this.statusStrip1.TabIndex = 105;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -152,7 +152,7 @@
             this.dgvConnectionList.RowHeadersWidth = 51;
             this.dgvConnectionList.RowTemplate.Height = 29;
             this.dgvConnectionList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvConnectionList.Size = new System.Drawing.Size(769, 278);
+            this.dgvConnectionList.Size = new System.Drawing.Size(788, 342);
             this.dgvConnectionList.TabIndex = 101;
             this.dgvConnectionList.TabStop = false;
             // 
@@ -196,7 +196,7 @@
             this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 371);
+            this.ClientSize = new System.Drawing.Size(812, 435);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.HomePicture);
             this.Controls.Add(this.dgvConnectionList);
@@ -204,6 +204,7 @@
             this.Controls.Add(this.cbSearchValue);
             this.Controls.Add(this.lblStationName);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(558, 230);
             this.Name = "DepartureBoardForm";
             this.Text = "Abfahrtstafel";
             ((System.ComponentModel.ISupportInitialize)(this.HomePicture)).EndInit();
