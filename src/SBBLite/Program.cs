@@ -1,3 +1,4 @@
+using Common;
 using SwissTransport.Core;
 
 namespace SBBLite
@@ -5,15 +6,24 @@ namespace SBBLite
     internal static class Program
     {
         /// <summary>
-        ///  The main entry point for the application.
+        ///  Entry point of the app
         /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm(new Transport()));
+            try
+            {
+                ApplicationConfiguration.Initialize();
+                Application.Run(new MainForm(new Transport()));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(
+                    Constants.EXCEPTION_APEARED + ex.Message,
+                    Constants.FAILURE_CAPTION,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

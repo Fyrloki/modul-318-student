@@ -34,5 +34,11 @@
         public const string WILDCARD = "%";
 
         public const string NO_CONNECTION_FOUND = "Keine Verbindung gefunden";
+
+        public const string NO_CONNECTION_TO_SERVER = "Keine Verbindung";
+
+        public const string EXCEPTION_APEARED = "Es ist ein Fehler aufgetreten. Das Programm wird sich, nach dem 'OK' betätigt wurde, beenden. \n \n";
+
+        public const string FAILURE_CAPTION = "Fehler";
     }
 }

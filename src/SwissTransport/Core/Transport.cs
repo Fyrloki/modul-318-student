@@ -61,6 +61,11 @@
             return this.GetObject<Connections>(uri);
         }
 
+        public void TestConnection()
+        {
+            this.GetObject<Connections>(new Uri($"{WebApiHost}connections?from=Sursee&to=Luzern&date={DateTime.Today}&limit=1"));
+        }
+
         private T GetObject<T>(Uri uri)
         {
             HttpResponseMessage response = this.httpClient
